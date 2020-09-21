@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, ForeignKey
+from sqlalchemy.orm import relationship
 
 from db import db
 from model.utils import create_basic_db_operations
@@ -11,3 +12,4 @@ class OrderElementModel(db.Model):
     count = Column(Integer)
     order_id = Column(Integer, ForeignKey('orders.id'))
     item_id = Column(Integer, ForeignKey('items.id'))
+    item = relationship("ItemModel")

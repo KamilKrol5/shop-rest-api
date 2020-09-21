@@ -11,4 +11,4 @@ class UserModel(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String)
     email = Column(String, unique=True)
-    orders = relationship('OrderModel', backref='users')
+    orders = relationship('OrderModel', backref='user')

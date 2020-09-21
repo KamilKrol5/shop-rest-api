@@ -13,7 +13,7 @@ class User(Resource):
     def get(user_id):
         user = UserModel.find_by_id(user_id)
         if not user:
-            return {'message': f'User with id={user_id} does not exists.'}, 404
+            return {'message': f'User with id={user_id} does not exist.'}, 404
         return user_schema.dump(user)
 
 

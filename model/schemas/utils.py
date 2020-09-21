@@ -1,3 +1,5 @@
+from typing import Type
+
 from db import ma
 
 
@@ -9,7 +11,7 @@ from db import ma
 #     return cls
 
 
-def create_basic_schema(cls) -> ma.SQLAlchemyAutoSchema:
+def create_basic_schema(cls) -> Type[ma.SQLAlchemyAutoSchema]:
     class Schema(ma.SQLAlchemyAutoSchema):
         class Meta:
             model = cls

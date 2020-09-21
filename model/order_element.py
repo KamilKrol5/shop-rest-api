@@ -9,7 +9,7 @@ from model.utils import create_basic_db_operations
 class OrderElementModel(db.Model):
     __tablename__ = 'order_elements'
     id = Column(Integer, primary_key=True)
-    count = Column(Integer)
-    order_id = Column(Integer, ForeignKey('orders.id'))
-    item_id = Column(Integer, ForeignKey('items.id'))
+    count = Column(Integer, nullable=False, default=1)
+    order_id = Column(Integer, ForeignKey('orders.id'), nullable=False)
+    item_id = Column(Integer, ForeignKey('items.id'), nullable=False)
     item = relationship("ItemModel")

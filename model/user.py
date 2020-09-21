@@ -8,7 +8,7 @@ from model.utils import create_basic_db_operations
 @create_basic_db_operations
 class UserModel(db.Model):
     __tablename__ = 'users'
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String)
-    email = Column(String, unique=True)
+    id = Column(Integer, primary_key=True)
+    name = Column(String, nullable=False)
+    email = Column(String, unique=True, nullable=False)
     orders = relationship('OrderModel', backref='user')

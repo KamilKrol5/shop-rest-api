@@ -26,10 +26,10 @@ def db_populate():
         UserModel(id=5, name='Zbigniew Stonoga', email='ziobroprzestanmirodzine@przesladowac.com'),
     ]
     categories = [
-        ItemCategoryModel(id=0, name='fun'),
-        ItemCategoryModel(id=1, name='antique'),
-        ItemCategoryModel(id=2, name='music'),
-        ItemCategoryModel(id=3, name='computer'),
+        ItemCategoryModel(name='fun'),
+        ItemCategoryModel(name='antique'),
+        ItemCategoryModel(name='music'),
+        ItemCategoryModel(name='computer'),
     ]
     items = [
         ItemModel(id=1, name='Procesor intel', price=199.9, categories=[

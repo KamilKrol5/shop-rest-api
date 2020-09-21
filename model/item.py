@@ -10,7 +10,7 @@ from model.utils import create_basic_db_operations
 class ItemModel(db.Model):
     __tablename__ = 'items'
     id = Column(Integer, primary_key=True)
-    name = Column(String)
-    description = Column(String)
-    price = Column(Float(precision=2))
+    name = Column(String, nullable=False)
+    description = Column(String, nullable=True)
+    price = Column(Float(precision=2), nullable=False)
     categories = relationship('ItemCategoryModel', secondary=item_category_and_item_association, back_populates='items')

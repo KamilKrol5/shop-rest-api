@@ -1,7 +1,16 @@
+from marshmallow_sqlalchemy.fields import Nested
+
+from db import ma
 from model.item import ItemModel
+from model.schemas.item_category_schema import ItemCategorySchema
 from model.schemas.utils import create_basic_schema
 
-ItemSchema = create_basic_schema(ItemModel)
+_ItemSchemaBase = create_basic_schema(ItemModel, _include_relationships=True)
 
-item_schema = ItemSchema()
-items_schema = ItemSchema(many=True)
+
+class ItemSchema(_ItemSchemaBase):
+    categories = Nested(ItemCategorySchema, many=True)
+
+
+item_schema: ma.SQLAlchemyAutoSchema = ItemSchema()
+items_schema: ma.SQLAlchemyAutoSchema = ItemSchema(many=True)

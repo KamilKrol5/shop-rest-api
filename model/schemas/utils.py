@@ -11,9 +11,10 @@ from db import ma
 #     return cls
 
 
-def create_basic_schema(cls) -> Type[ma.SQLAlchemyAutoSchema]:
+def create_basic_schema(cls, _include_relationships=False) -> Type[ma.SQLAlchemyAutoSchema]:
     class Schema(ma.SQLAlchemyAutoSchema):
         class Meta:
             model = cls
+            include_relationships = _include_relationships
 
     return Schema

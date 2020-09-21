@@ -23,6 +23,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # turns off flask_sqlalche
 
 api = Api(app)
 api.add_resource(User, '/user/<int:user_id>')
+api.add_resource(Users, '/users')
+api.add_resource(Item, '/item/<int:item_id>')
 
 db.init_app(app)
 app.cli.add_command(db_cli)

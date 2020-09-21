@@ -12,6 +12,7 @@ from model.order_status import OrderStatus
 from model.order import OrderModel
 
 from db import db
+from resources.user import User
 
 app = Flask(__name__)
 
@@ -21,6 +22,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # turns off flask_sqlalche
 # app.config['PROPAGATE_EXCEPTIONS'] = True
 
 api = Api(app)
+api.add_resource(User, '/user/<int:user_id>')
 
 db.init_app(app)
 app.cli.add_command(db_cli)

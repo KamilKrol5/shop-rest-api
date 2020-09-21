@@ -11,11 +11,12 @@ from db import ma
 #     return cls
 
 
-def create_basic_schema(cls, _include_relationships=False, _include_fk=False) -> Type[ma.SQLAlchemyAutoSchema]:
+def create_basic_schema(cls, _include_relationships=False, _include_fk=False, excluded=()) -> Type[ma.SQLAlchemyAutoSchema]:
     class Schema(ma.SQLAlchemyAutoSchema):
         class Meta:
             model = cls
             include_relationships = _include_relationships
             include_fk = _include_fk
+            exclude = excluded
 
     return Schema

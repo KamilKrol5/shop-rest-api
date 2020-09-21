@@ -4,15 +4,9 @@ from flask import Flask
 from flask_restful import Api
 
 from app_cli_commands import db_cli
-from model.item_category import ItemCategoryModel
-from model.item import ItemModel
-from model.user import UserModel
-from model.order_element import OrderElementModel
-from model.order_status import OrderStatus
-from model.order import OrderModel
 
 from db import db
-from resources.items import Item, Items, ItemCategory, ItemCategories
+from resources.items import Item, Items, ItemCategory, ItemCategories, CreateItemCategory
 from resources.orders import OrderElement, OrderElements, Orders, Order
 from resources.users import User, Users
 
@@ -31,6 +25,7 @@ api.add_resource(Item, '/item/<int:item_id>')
 api.add_resource(Items, '/items', '/items/all')
 
 api.add_resource(ItemCategory, '/item-category/<int:category_id>')
+api.add_resource(CreateItemCategory, '/item-category')
 api.add_resource(ItemCategories, '/item-categories', '/item-categories/all')
 
 api.add_resource(OrderElement, '/order-element/<int:order_elem_id>')
@@ -38,6 +33,7 @@ api.add_resource(OrderElements, '/order-elements', '/order-elements/all')
 
 api.add_resource(Order, '/order/<int:order_id>')
 api.add_resource(Orders, '/orders', '/orders/all')
+
 
 db.init_app(app)
 app.cli.add_command(db_cli)

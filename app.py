@@ -12,7 +12,8 @@ from model.order_status import OrderStatus
 from model.order import OrderModel
 
 from db import db
-from resources.items import Item, Items
+from resources.items import Item, Items, ItemCategory, ItemCategories
+from resources.orders import OrderElement, OrderElements, Orders, Order
 from resources.users import User, Users
 
 app = Flask(__name__)
@@ -25,8 +26,18 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # turns off flask_sqlalche
 api = Api(app)
 api.add_resource(User, '/user/<int:user_id>')
 api.add_resource(Users, '/users', '/users/all')
+
 api.add_resource(Item, '/item/<int:item_id>')
 api.add_resource(Items, '/items', '/items/all')
+
+api.add_resource(ItemCategory, '/item-category/<int:category_id>')
+api.add_resource(ItemCategories, '/item-categories', '/item-categories/all')
+
+api.add_resource(OrderElement, '/order-element/<int:order_elem_id>')
+api.add_resource(OrderElements, '/order-elements', '/order-elements/all')
+
+api.add_resource(Order, '/order/<int:order_id>')
+api.add_resource(Orders, '/orders', '/orders/all')
 
 db.init_app(app)
 app.cli.add_command(db_cli)

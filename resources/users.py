@@ -1,24 +1,18 @@
-from flask import jsonify
 from flask_restful import Resource
 
 from model.schemas.user_schema import user_schema, users_schema
 from model.user import UserModel
+from resources.common.decorators import add_get_by_id_endpoint, add_get_all_endpoint
 
 
 # user registering, logging, etc.
 
 
+@add_get_by_id_endpoint(UserModel, user_schema)
 class User(Resource):
-    @staticmethod
-    def get(user_id):
-        user = UserModel.find_by_id(user_id)
-        if not user:
-            return {'message': f'User with id={user_id} does not exist.'}, 404
-        return user_schema.dump(user)
+    pass
 
 
+@add_get_all_endpoint(UserModel, users_schema)
 class Users(Resource):
-    @staticmethod
-    def get():
-        users = UserModel.find_all()
-        return users_schema.dump(users)
+    pass

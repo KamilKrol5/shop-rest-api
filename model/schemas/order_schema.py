@@ -8,5 +8,5 @@ class OrderSchema(ma.SQLAlchemyAutoSchema):
     # TODO: handle enum type
 
 
-order_schema = OrderSchema()
-orders_schema = OrderSchema(many=True)
+order_schema: ma.SQLAlchemyAutoSchema = OrderSchema()
+orders_schema: ma.SQLAlchemyAutoSchema = OrderSchema(many=True)

@@ -1,7 +1,7 @@
 from flask_restful import Resource
 
 from model.item import ItemModel
-from model.schemas.item_schema import item_schema
+from model.schemas.item_schema import item_schema, items_schema
 
 
 class Item(Resource):
@@ -13,3 +13,9 @@ class Item(Resource):
         print(item.categories)
         return item_schema.dump(item)
 
+
+class Items(Resource):
+    @staticmethod
+    def get():
+        items = ItemModel.find_all()
+        return items_schema.dump(items)

@@ -35,6 +35,8 @@ class UserCreation(Resource):
             db.session.rollback()
             return {"message": f"User with e-mail address: {item.email} already exists."}, 400
 
+        return {"message": "Entry successfully created.", "entry": user_schema.dump(item)}, 201
+
 
 @add_get_all_endpoint(UserModel, users_schema)
 class Users(Resource):

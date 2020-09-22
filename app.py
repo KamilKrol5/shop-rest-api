@@ -6,7 +6,7 @@ from flask_restful import Api
 from app_cli_commands import db_cli
 
 from db import db
-from resources.items import Item, Items, ItemCategory, ItemCategories, CreateItemCategory
+from resources.items import Item, Items, ItemCategory, ItemCategories, CreateItemCategory, CreateItem
 from resources.orders import OrderElement, OrderElements, Orders, Order
 from resources.users import User, Users, UserCreation
 
@@ -23,6 +23,7 @@ api.add_resource(UserCreation, '/user')
 api.add_resource(Users, '/users', '/users/all')
 
 api.add_resource(Item, '/item/<int:item_id>')
+api.add_resource(CreateItem, '/item')
 api.add_resource(Items, '/items', '/items/all')
 
 api.add_resource(ItemCategory, '/item-category/<int:category_id>')

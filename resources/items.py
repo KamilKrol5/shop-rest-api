@@ -1,14 +1,11 @@
-from flask import request
 from flask_restful import Resource
-from marshmallow import ValidationError
 
 from model.item import ItemModel
 from model.item_category import ItemCategoryModel
 from model.schemas.item_category_schema import item_category_creation_schema, item_category_schema, \
     item_categories_schema
 from model.schemas.item_schema import item_schema, items_schema
-from resources.common.decorators import add_get_all_endpoint, add_get_by_id_endpoint
-from resources.common.utils import handle_no_json_body
+from resources.common.decorators import add_get_all_endpoint, add_get_by_id_endpoint, add_post_basic_creation
 
 
 @add_get_by_id_endpoint(ItemModel, item_schema)
@@ -36,18 +33,9 @@ class ItemCategory(Resource):
     #     return {}, 201
 
 
+@add_post_basic_creation(ItemCategoryModel, item_category_creation_schema, item_category_schema)
 class CreateItemCategory(Resource):
-    @staticmethod
-    def post():
-        if not request.is_json:
-            return handle_no_json_body()
-        try:
-            item = item_category_creation_schema.load(request.json)
-        except ValidationError as err:
-            return {"message": err.messages}, 400
-
-        item = ItemCategoryModel(**item)
-        item.add_to_db()
+    pass
 
 
 @add_get_all_endpoint(ItemCategoryModel, item_categories_schema)

@@ -13,4 +13,9 @@ class ItemModel(db.Model):
     name = Column(String, nullable=False)
     description = Column(String, nullable=True)
     price = Column(Float(precision=2), nullable=False)
-    categories = relationship('ItemCategoryModel', secondary=item_category_and_item_association, back_populates='items')
+    categories = relationship(
+        'ItemCategoryModel',
+        secondary=item_category_and_item_association,
+        back_populates='items',
+        cascade="save-update"
+    )

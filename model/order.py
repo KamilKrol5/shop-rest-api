@@ -16,4 +16,4 @@ class OrderModel(db.Model):
     comments = Column(String)
     status = Column(Enum(OrderStatus), nullable=False)
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
-    elements = relationship("OrderElementModel", backref='order')
+    elements = relationship("OrderElementModel", backref='order', cascade="all, delete-orphan")

@@ -1,11 +1,9 @@
 from typing import Type
 
-from flask import request
-from marshmallow import ValidationError
 from sqlalchemy.exc import IntegrityError
 
 from db import ma, db
-from resources.common.utils import _retrieve_kwarg_by_regex, handle_no_json_body
+from resources.common.utils import _retrieve_kwarg_by_regex, handle_request_validation_and_serialisation
 
 
 def _get_by_id(
@@ -48,15 +46,10 @@ def _post(
         on_integrity_error_message=None
 ):
     assert hasattr(model_class, 'add_to_db')
-    if not request.is_json:
-        return handle_no_json_body()
-    try:
-
-        item = schema_for_creation_obj.load(request.json)
-    except ValidationError as err:
-        return {"message": err.messages}, 400
-
-    item = model_class(**item)
+    result_dict, err_code = handle_request_validation_and_serialisation(schema_for_creation_obj)
+    if err_code:
+        return result_dict, err_code
+    item = model_class(**result_dict)
     try:
         item.add_to_db()
     except IntegrityError:

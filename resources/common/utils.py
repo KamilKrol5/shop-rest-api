@@ -1,6 +1,11 @@
 import re
+from typing import Dict, Any, Tuple, Optional, Type
 
+from flask import request
 from flask_restful import Resource
+from marshmallow import ValidationError
+
+from db import ma, db
 
 
 def add_to_allowed_methods(cls: Resource, method: str):
@@ -23,3 +28,16 @@ def _retrieve_kwarg_by_regex(regex, kwargs):
         if re.match(regex, kwarg):
             return kwarg, kwargs[kwarg]
     return None
+
+
+def handle_request_validation_and_serialisation(
+        schema_for_creation_obj: ma.SQLAlchemySchema
+) -> Tuple[Dict[str, Any], Optional[int]]:
+    if not request.is_json:
+        return handle_no_json_body()
+    try:
+        item = schema_for_creation_obj.load(request.json, session=db.session)
+    except ValidationError as err:
+        return {"message": err.messages}, 400
+
+    return item, None

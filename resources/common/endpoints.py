@@ -1,15 +1,7 @@
-import re
 from typing import Type
 
 from db import ma, db
-
-
-def _retrieve_kwarg_by_regex(regex, kwargs):
-    for kwarg in kwargs:
-        print(kwarg)
-        if re.match(regex, kwarg):
-            return kwarg, kwargs[kwarg]
-    return None
+from resources.common.utils import _retrieve_kwarg_by_regex
 
 
 def _get_by_id(

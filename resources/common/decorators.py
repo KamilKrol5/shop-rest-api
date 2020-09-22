@@ -3,7 +3,7 @@ from typing import Type
 
 from db import ma, db
 from resources.common.endpoints import _get_by_id, _get_all
-from resources.common.utils import add_method
+from resources.common.utils import add_to_allowed_methods
 
 
 def add_get_by_id_endpoint(
@@ -12,7 +12,7 @@ def add_get_by_id_endpoint(
 ):
     def decorator(cls):
         setattr(cls, 'get', staticmethod(partial(_get_by_id, model_class, schema_obj)))
-        add_method(cls, 'GET')
+        add_to_allowed_methods(cls, 'GET')
         return cls
 
     return decorator
@@ -24,7 +24,7 @@ def add_get_all_endpoint(
 ):
     def decorator(cls):
         setattr(cls, 'get', staticmethod(partial(_get_all, model_class, schema_obj)))
-        add_method(cls, 'GET')
+        add_to_allowed_methods(cls, 'GET')
         return cls
 
     return decorator

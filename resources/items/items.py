@@ -52,16 +52,6 @@ class CreateItem(Resource):
 @add_get_by_id_endpoint(ItemCategoryModel, item_category_schema)
 class ItemCategory(Resource):
     pass
-    # @staticmethod
-    # def put(category_id=None):
-    #     if not request.is_json:
-    #         return {"message": f"Invalid request. Request body must be valid JSON."}, 400
-    #     print(request.json)
-    #     item = item_category_schema.load(request.json)
-    #     print(item)
-    #     print(ItemCategory.__dict__)
-    #
-    #     return {}, 201
 
 
 @add_post_basic_creation(ItemCategoryModel, item_category_creation_schema, item_category_schema)

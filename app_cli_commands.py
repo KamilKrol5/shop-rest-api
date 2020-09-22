@@ -1,8 +1,8 @@
 from flask.cli import AppGroup
 
 from db import db
-from model.item_category import ItemCategoryModel
 from model.item import ItemModel
+from model.item_category import ItemCategoryModel
 from model.order import OrderModel
 from model.order_element import OrderElementModel
 from model.order_status import OrderStatus

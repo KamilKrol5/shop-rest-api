@@ -4,18 +4,16 @@ from flask import Flask
 from flask_restful import Api
 
 from app_cli_commands import db_cli
-
 from db import db
-from resources.items import Item, Items, ItemCategory, ItemCategories, CreateItemCategory, CreateItem
+from resources.items.items import Item, Items, ItemCategory, ItemCategories, CreateItemCategory, CreateItem
 from resources.orders.orders import OrderElement, OrderElements, Orders, Order, CreateOrder, UpdateOrderAdvanced
-from resources.users import User, Users, UserCreation
+from resources.users.users import User, Users, UserCreation
 
 app = Flask(__name__)
 
 base_directory = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///" + os.path.join(base_directory, "database.db")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # turns off flask_sqlalchemy modification tracker
-# app.config['PROPAGATE_EXCEPTIONS'] = True
 
 api = Api(app)
 api.add_resource(User, '/user/<int:user_id>')
@@ -37,7 +35,6 @@ api.add_resource(Order, '/order/<int:order_id>')
 api.add_resource(CreateOrder, '/order')
 api.add_resource(UpdateOrderAdvanced, '/order/advanced-update/<int:order_id>')
 api.add_resource(Orders, '/orders', '/orders/all')
-
 
 db.init_app(app)
 app.cli.add_command(db_cli)

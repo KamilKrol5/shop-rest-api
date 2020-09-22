@@ -11,4 +11,8 @@ class ItemCategoryModel(db.Model):
     __tablename__ = 'item_categories'
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String, nullable=False)
-    items = relationship("ItemModel", secondary=item_category_and_item_association, back_populates='categories')
+    items = relationship(
+        "ItemModel",
+        secondary=item_category_and_item_association,
+        back_populates='categories'
+    )

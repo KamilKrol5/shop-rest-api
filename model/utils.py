@@ -1,11 +1,13 @@
 from typing import Optional, Type, List
 
+from sqlalchemy.exc import IntegrityError
+
 from db import db
 
 T = Type[db.Model]
 
 
-def find_by_id(model_class: T, _id) -> Optional[T]:
+def find_by_id(model_class: T, _id: int) -> Optional[T]:
     return model_class.query.filter_by(id=_id).first()
 
 
@@ -14,8 +16,12 @@ def find_all(model_class: T) -> List[T]:
 
 
 def add_to_db(self):
-    db.session.add(self)
-    db.session.commit()
+    try:
+        db.session.add(self)
+        db.session.commit()
+    except IntegrityError:
+        db.session.rollback()
+        raise
 
 
 def add_all_to_db(items: List[T]):

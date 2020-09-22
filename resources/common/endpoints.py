@@ -53,7 +53,6 @@ def _post(
     try:
         item.add_to_db()
     except IntegrityError:
-        db.session.rollback()
         if not on_integrity_error_message:
             return {"message": f"Integrity error."}, 400
         return {"message": on_integrity_error_message}, 400

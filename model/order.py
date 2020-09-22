@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Enum
 from sqlalchemy.orm import relationship
 
@@ -10,7 +12,7 @@ from model.utils import create_basic_db_operations
 class OrderModel(db.Model):
     __tablename__ = 'orders'
     id = Column(Integer, primary_key=True)
-    date = Column(DateTime, nullable=True)  # for development
+    date = Column(DateTime, nullable=True, default=datetime.utcnow())  # for development
     comments = Column(String)
     status = Column(Enum(OrderStatus), nullable=False)
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)

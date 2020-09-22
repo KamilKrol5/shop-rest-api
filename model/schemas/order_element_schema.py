@@ -6,6 +6,9 @@ from model.schemas.item_schema import ItemSchemaRich
 from model.schemas.utils import create_basic_schema
 
 OrderElementSchema = create_basic_schema(OrderElementModel, _include_relationships=True)
+OrderElementCreationSchema = create_basic_schema(
+    OrderElementModel, _include_fk=True, excluded=('id', 'order_id')
+)
 
 
 class OrderElementSchemaRich(OrderElementSchema):
@@ -13,5 +16,6 @@ class OrderElementSchemaRich(OrderElementSchema):
 
 
 order_element_schema: ma.SQLAlchemyAutoSchema = OrderElementSchema()
+order_element_creation_schema: ma.SQLAlchemyAutoSchema = OrderElementCreationSchema()
 order_element_schema_rich: ma.SQLAlchemyAutoSchema = OrderElementSchemaRich()
 order_elements_schema: ma.SQLAlchemyAutoSchema = OrderElementSchema(many=True)

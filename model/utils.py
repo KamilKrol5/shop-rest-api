@@ -1,4 +1,4 @@
-from typing import Optional, Type, List
+from typing import Optional, Type, List, Iterable
 
 from sqlalchemy.exc import IntegrityError
 
@@ -47,9 +47,9 @@ def delete_from_db(self):
         raise
 
 
-def delete_all_from_db(items: List[T]):
+def delete_all_from_db(items: Iterable[T]):
     for item in items:
-        item.delete_from_dc()
+        item.delete_from_db()
 
 
 def create_basic_db_operations(cls):

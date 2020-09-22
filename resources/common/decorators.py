@@ -2,7 +2,7 @@ from functools import partial
 from typing import Type
 
 from db import ma, db
-from resources.common.endpoints import _get_by_id, _get_all, _post
+from resources.common.endpoints import _get_by_id, _get_all, _post, _delete
 from resources.common.utils import add_to_allowed_methods
 
 
@@ -46,6 +46,15 @@ def add_post_basic_creation(
         )
         setattr(cls, 'post', post_method)
         add_to_allowed_methods(cls, 'POST')
+        return cls
+
+    return decorator
+
+
+def add_delete_endpoint(model_class: Type[db.Model]):
+    def decorator(cls):
+        setattr(cls, 'delete', staticmethod(partial(_delete, model_class)))
+        add_to_allowed_methods(cls, 'DELETE')
         return cls
 
     return decorator

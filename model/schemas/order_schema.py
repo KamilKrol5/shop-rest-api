@@ -12,6 +12,11 @@ _OrderCreationSchema = create_basic_schema(
     _include_relationships=True,
     excluded=('id', 'date', 'user')
 )
+OrderUpdateSchema = create_basic_schema(
+    OrderModel,
+    _include_fk=True,
+    excluded=('id', 'date', 'user')
+)
 
 
 class OrderCreationSchema(_OrderCreationSchema):
@@ -24,5 +29,6 @@ class OrderSchemaRich(OrderSchema):
 
 order_schema: ma.SQLAlchemyAutoSchema = OrderSchemaRich()
 order_creation_schema: ma.SQLAlchemyAutoSchema = OrderCreationSchema()
+order_update_schema: ma.SQLAlchemyAutoSchema = OrderUpdateSchema()
 orders_schema: ma.SQLAlchemyAutoSchema = OrderSchema(many=True)
 orders_schema_rich: ma.SQLAlchemyAutoSchema = OrderSchemaRich(many=True)

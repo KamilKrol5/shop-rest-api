@@ -7,7 +7,7 @@ from app_cli_commands import db_cli
 
 from db import db
 from resources.items import Item, Items, ItemCategory, ItemCategories, CreateItemCategory, CreateItem
-from resources.orders import OrderElement, OrderElements, Orders, Order, CreateOrder
+from resources.orders.orders import OrderElement, OrderElements, Orders, Order, CreateOrder, UpdateOrderAdvanced
 from resources.users import User, Users, UserCreation
 
 app = Flask(__name__)
@@ -35,6 +35,7 @@ api.add_resource(OrderElements, '/order-elements', '/order-elements/all')
 
 api.add_resource(Order, '/order/<int:order_id>')
 api.add_resource(CreateOrder, '/order')
+api.add_resource(UpdateOrderAdvanced, '/order/advanced-update/<int:order_id>')
 api.add_resource(Orders, '/orders', '/orders/all')
 
 

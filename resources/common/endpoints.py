@@ -1,4 +1,4 @@
-from typing import Type
+from typing import Type, Optional
 
 from sqlalchemy.exc import IntegrityError
 
@@ -9,7 +9,7 @@ from resources.common.utils import _retrieve_kwarg_by_regex, handle_request_vali
 def _get_by_id(
         model_class: Type[db.Model],
         schema_obj: ma.SQLAlchemySchema,
-        entry_id=None,
+        entry_id: Optional[int] = None,
         **kwargs
 ):
     """
@@ -61,3 +61,31 @@ def _post(
                "message": "Entry successfully created.",
                "entry": schema_for_existing_obj.dump(item)
            }, 201
+
+
+def _delete(
+        model_class: Type[db.Model],
+        entry_id: Optional[int] = None,
+        **kwargs
+):
+    """
+    Args:
+        model_class (Type[SQLAlchemy.Model]):
+            Model which is used to reach the database. The class must support `delete_from_db` function.
+        entry_id (int):
+            The id of the element to delete. If it is None, then entry id is searched in the kwargs.
+            The keyword argument which has `id` in its name, is treated as entry_id.
+    """
+    if not entry_id:
+        _, entry_id = _retrieve_kwarg_by_regex(r'.*id.*', kwargs)
+        if not entry_id:
+            return {'message': f'The arguments given to _find_by_id are invalid.'}, 500
+
+    assert hasattr(model_class, 'delete_from_db')
+
+    entry = model_class.find_by_id(entry_id)
+    if not entry:
+        return {"message": f"The entry with id: {entry_id} does not exist."}, 400
+    entry.delete_from_db()
+
+    return {"message": f"The entry with id: {entry_id} was successfully deleted."}, 200

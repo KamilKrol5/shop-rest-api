@@ -1,1 +1,1 @@
-# rest-api-recruitment-task
+# shop-rest-api

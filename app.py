@@ -8,7 +8,7 @@ from app_cli_commands import db_cli
 from db import db
 from resources.items import Item, Items, ItemCategory, ItemCategories, CreateItemCategory
 from resources.orders import OrderElement, OrderElements, Orders, Order
-from resources.users import User, Users
+from resources.users import User, Users, UserCreation
 
 app = Flask(__name__)
 
@@ -19,6 +19,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # turns off flask_sqlalche
 
 api = Api(app)
 api.add_resource(User, '/user/<int:user_id>')
+api.add_resource(UserCreation, '/user')
 api.add_resource(Users, '/users', '/users/all')
 
 api.add_resource(Item, '/item/<int:item_id>')

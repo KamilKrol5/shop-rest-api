@@ -39,8 +39,12 @@ def update_all_in_db(items: List[T]):
 
 
 def delete_from_db(self):
-    db.session.delete(self)
-    db.session.commit()
+    try:
+        db.session.delete(self)
+        db.session.commit()
+    except IntegrityError:
+        db.session.rollback()
+        raise
 
 
 def delete_all_from_db(items: List[T]):

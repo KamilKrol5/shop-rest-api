@@ -1,5 +1,5 @@
 import re
-from typing import Dict, Any, Tuple, Optional, Type
+from typing import Dict, Any, Tuple, Optional, Type, List
 
 from flask import request
 from flask_restful import Resource
@@ -41,3 +41,7 @@ def handle_request_validation_and_serialisation(
         return {"message": err.messages}, 400
 
     return item, None
+
+
+def _items_unique(elements: List[int]) -> bool:
+    return len(elements) == len(set(elements))

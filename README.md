@@ -2,8 +2,8 @@
 #### Main assumptions:
 1. There are already endpoints for signing up and obtaining some kind of
 auth token. 
-    * That is why user model has no password field.
 2. Security related issues are skipped. 
+    * That is why user model has no password field.
     * It can be easily done with e.g. Flask-Login, Flask-User, Flask-JWT.
 3. When the order is created, it has `date` field assigned automatically. This field cannot be changed.
 4. Endpoints for filtering by some value (e.g. filter products by name or category, etc.) were skipped, since they were not part of the task. Nevertheless, they can be added very easily.

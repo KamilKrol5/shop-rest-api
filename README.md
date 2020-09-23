@@ -18,6 +18,7 @@ auth token.
 3. There are the decorators, which enable some basic endpoints to be created easily. For example, all `GET` endpoints were created by the use of them. They make adding new endpoints faster and easier.
 4. Thanks to distinction between models and resources, the API resources representation/implementation can be _detached_ from the database model. For example, both `orders` and `order_elements` tables compose the `/order` resource.
 5. UI for basic documentation can be found under: `/api/docs/ui`.
+6. Worth to consider not relational database, if the data is used for ML.
 #### Endpoints:
 ![](endpoints.png)
 #### Examples:

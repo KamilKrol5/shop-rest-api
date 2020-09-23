@@ -43,7 +43,7 @@ Status: 201 CREATED
 ```
 ##### 2. Adding new item (fail).
 
-Let's assume that categories with following ids: 1,2,3 are in the database.
+Let's assume that categories with following ids: 1,2,3 are in the database.  
 **Request**  
 Endpoint: `/item`. Method: `POST`. Body: 
 ```json
@@ -82,7 +82,7 @@ Status: 400 BAD REQUEST
 ```
 ##### 4. Adding new item (ok).
 
-Let's assume that categories with following ids: 1,2,3 are in the database.
+Let's assume that categories with following ids: 1,2,3 are in the database.  
 **Request**  
 Endpoint: `/item`. Method: `POST`. Body: 
 ```json
@@ -157,7 +157,7 @@ Status: 200 OK
 ```
 ##### 6. Creating an order (ok).
 
-Let's assume that items with following ids: 1,2,3 are in the database.
+Let's assume that items with following ids: 1,2,3 are in the database.  
 **Request**  
 Endpoint: `/order`. Method: `POST`. Body: 
 ```json
@@ -235,7 +235,7 @@ Status: 201 CREATED
 ```
 ##### 6. Creating an order (fail).
 
-Let's assume that items with following ids: 1,2,3 are in the database.
+Let's assume that items with following ids: 1,2,3 are in the database.  
 **Request**  
 Endpoint: `/order`. Method: `POST`. Body: 
 ```json
@@ -261,6 +261,7 @@ Status: 400 BAD REQUEST
 ##### 7. Updating an order - basic update.
 
 **Request**  
+Endpoint: `/order`. Method: `PUT`. Body:  
 ```json
 {
     "user_id": 5,
@@ -268,5 +269,13 @@ Status: 400 BAD REQUEST
 }
 ```
 **Response**  
-Status: 400 BAD REQUEST  
-The same object in the body with `user_id` and `status` changed.
+Status: 200 OK  
+The same object in the body with `user_id` and `status` changed.  
+##### 8. Updating an order - advanced update.
+
+**Request**  
+Endpoint: `/order`. Method: `PUT`. Body:  
+The same as the request body when creation. Advanced update allows to define new order elements.  
+**Response**  
+Status: 200 OK  
+The updated order object in the same format as in _order creation_ response. 

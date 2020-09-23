@@ -94,14 +94,17 @@ class UpdateOrderAdvanced(Resource):
         new_elements = result_dict['elements']
         old_elements = [order_element_creation_schema.dump(e) for e in order.elements]
 
-        old_to_delete = [e for e in old_elements if e not in new_elements]
+        old_to_delete = [e['item_id'] for e in old_elements if e not in new_elements]
         new_to_add = [e for e in new_elements if e not in old_elements]
         print('O', old_elements)
         print('N', new_elements)
         print(old_to_delete)
         print(new_to_add)
 
-        old_to_delete = filter(lambda x: x.item_id in old_to_delete, order.elements)
+        # for x in order.elements:
+        #     print(x.item_id in old_to_delete)
+
+        old_to_delete = list(filter(lambda x: x.item_id in old_to_delete, order.elements))
         OrderElementModel.delete_all_from_db(old_to_delete)
 
         new_to_add = [OrderElementModel(**order_element_creation_schema.load(e)) for e in new_to_add]
@@ -114,6 +117,7 @@ class UpdateOrderAdvanced(Resource):
         order.user_id = result_dict['user_id']
         order.status = result_dict['status']
         order.comments = result_dict['comments']
+        order.elements = order.elements + new_to_add
 
         order.update_in_db()
 

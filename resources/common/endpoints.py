@@ -85,7 +85,7 @@ def _delete(
 
     entry = model_class.find_by_id(entry_id)
     if not entry:
-        return {"message": f"The entry with id: {entry_id} does not exist."}, 400
+        return {"message": f"The entry with id: {entry_id} does not exist."}, 404
     entry.delete_from_db()
 
     return {"message": f"The entry with id: {entry_id} was successfully deleted."}, 200

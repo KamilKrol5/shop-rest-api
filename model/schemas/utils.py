@@ -1,5 +1,7 @@
 from typing import Type
 
+from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
+
 from db import ma
 
 
@@ -9,7 +11,7 @@ def create_basic_schema(
         _include_fk=False,
         excluded=()
 ) -> Type[ma.SQLAlchemyAutoSchema]:
-    class Schema(ma.SQLAlchemyAutoSchema):
+    class Schema(SQLAlchemyAutoSchema):
         class Meta:
             model = cls
             include_relationships = _include_relationships

@@ -1,5 +1,6 @@
 from flask import request
 from flask_restful import Resource
+from flask_restful_swagger_2 import swagger
 from marshmallow import ValidationError
 from sqlalchemy.exc import IntegrityError
 
@@ -19,8 +20,19 @@ class User(Resource):
 
 
 class UserCreation(Resource):
-    @staticmethod
-    def post():
+    @swagger.doc({
+        'description': 'Creates new user.',
+        'responses': {
+            '201': {
+                'description': 'User successfully created.'
+            },
+            '400': {
+                'description': 'Invalid data or user with provided e-mail already exists.'
+            }
+        },
+        'tags': ['Adding new data']
+    })
+    def post(self):
         if not request.is_json:
             return handle_no_json_body()
         try:

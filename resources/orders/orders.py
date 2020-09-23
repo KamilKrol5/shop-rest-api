@@ -1,4 +1,5 @@
 from flask_restful import Resource
+from flask_restful_swagger_2 import swagger
 
 from model.order import OrderModel
 from model.order_element import OrderElementModel
@@ -24,8 +25,20 @@ class OrderElements(Resource):
 @add_get_by_id_endpoint(OrderModel, order_schema)
 @add_delete_endpoint(OrderModel)
 class Order(Resource):
-    @staticmethod
-    def put(order_id: int):
+    @swagger.doc({
+        'description': 'Updates an order. So as to cange order elements use '
+                       '`/order/advanced-update/{order_id} endpoint.',
+        'responses': {
+            '200': {
+                'description': 'Order successfully updated.'
+            },
+            '400': {
+                'description': 'Invalid input.'
+            }
+        },
+        'tags': ['Updating data']
+    })
+    def put(self, order_id: int):
         result_dict, err_code = handle_request_validation_and_serialisation(order_update_schema)
         if err_code:
             return result_dict, err_code
@@ -44,8 +57,29 @@ class Order(Resource):
 
 
 class UpdateOrderAdvanced(Resource):
-    @staticmethod
-    def put(order_id: int):
+    @swagger.doc({
+        'description': 'Updates an order. The order can be fully edited, including its items.',
+        'parameters': [
+            {
+                'name': 'order_id',
+                'type': 'int',
+                'in': 'path'
+            }
+        ],
+        'responses': {
+            '200': {
+                'description': 'Order successfully updated.'
+            },
+            '404': {
+                'description': 'Order with provided id does nor exist.'
+            },
+            '400': {
+                'description': 'Invalid input.'
+            }
+        },
+        'tags': ['Updating data']
+    })
+    def put(self, order_id: int):
         result_dict, err_code = handle_request_validation_and_serialisation(order_creation_schema)
         if err_code:
             return result_dict, err_code
@@ -55,7 +89,7 @@ class UpdateOrderAdvanced(Resource):
 
         order = OrderModel.find_by_id(order_id)
         if not order:
-            return {"message": f"Order with id: {order_id} does not exist."}, 400
+            return {"message": f"Order with id: {order_id} does not exist."}, 404
 
         new_elements = result_dict['elements']
         old_elements = [order_element_creation_schema.dump(e) for e in order.elements]
@@ -88,8 +122,19 @@ class UpdateOrderAdvanced(Resource):
 
 
 class CreateOrder(Resource):
-    @staticmethod
-    def post():
+    @swagger.doc({
+        'description': 'Creates an order.',
+        'responses': {
+            '201': {
+                'description': 'Order successfully created.'
+            },
+            '400': {
+                'description': 'Invalid input.'
+            }
+        },
+        'tags': ['Adding new data']
+    })
+    def post(self):
         result_dict, err_code = handle_request_validation_and_serialisation(order_creation_schema)
         if err_code:
             return result_dict, err_code

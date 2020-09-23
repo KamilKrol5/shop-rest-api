@@ -1,4 +1,5 @@
 from flask_restful import Resource
+from flask_restful_swagger_2 import swagger
 from sqlalchemy.exc import IntegrityError
 
 from db import db
@@ -22,8 +23,22 @@ class Items(Resource):
 
 
 class CreateItem(Resource):
-    @staticmethod
-    def post():
+    @swagger.doc({
+        'description': 'Creates new item.',
+        'responses': {
+            '201': {
+                'description': 'Item successfully created.'
+            },
+            '404': {
+                'description': 'Provided item contains category id which does not exist.'
+            },
+            '400': {
+                'description': 'Invalid data.'
+            }
+        },
+        'tags': ['Adding new data']
+    })
+    def post(self):
         result_dict, err_code = handle_request_validation_and_serialisation(item_creation_schema)
         if err_code:
             return result_dict, err_code
@@ -38,7 +53,7 @@ class CreateItem(Resource):
                                "message": f"Category with id: {c_id} does not exists. "
                                           f"Item's category id's must exist before the item can be created. "
                                           f"Create this category and try again."
-                           }, 400
+                           }, 404
         try:
             item.add_to_db()
         except IntegrityError:

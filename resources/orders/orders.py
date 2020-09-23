@@ -47,9 +47,9 @@ class Order(Resource):
         if not order:
             return {"message": f"Order with id: {order_id} does not exist."}, 400
 
-        order.user_id = result_dict['user_id']
-        order.status = result_dict['status']
-        order.comments = result_dict['comments']
+        order.user_id = result_dict.get('user_id', order.user_id)
+        order.status = result_dict.get('status', order.status)
+        order.comments = result_dict.get('comments', order.comments)
         order.update_in_db()
 
         return {"message": f"The order with id: {order.id} updated successfully.",

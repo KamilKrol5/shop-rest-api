@@ -22,7 +22,7 @@ auth token.
 #### Endpoints:
 ![](endpoints.png)
 #### Examples:
-##### 1. Adding new item category.   
+#### 1. Adding new item category.   
 
 **Request**  
 Endpoint: `/item-category`. Method: `POST`. Body: 
@@ -42,46 +42,7 @@ Status: 201 CREATED
     }
 }
 ```
-##### 2. Adding new item (fail).
-
-Let's assume that categories with following ids: 1,2,3 are in the database.  
-**Request**  
-Endpoint: `/item`. Method: `POST`. Body: 
-```json
-{
-    "name": "Komputer 100 Giga",
-    "categories": [1, 10], 
-    "description": "Cool computer",
-    "price": 2499.99
-}
-```
-**Response**  
-Status: 404 NOT FOUND  
-```json
-{
-    "message": "Category with id: 10 does not exists. Item's category id's must exist before the item can be created. Create this category and try again."
-}
-```
-##### 3. Adding new item (fail).
-
-**Request**  
-Endpoint: `/item`. Method: `POST`. Body: 
-```json
-{
-    "name": "Komputer 100 Giga",
-    "categories": [], 
-    "description": "Cool computer",
-    "price": 2499.99
-}
-```
-**Response**  
-Status: 400 BAD REQUEST  
-```json
-{
-    "message": "Item must have at lest one category."
-}
-```
-##### 4. Adding new item (ok).
+#### 2. Adding new item (ok).
 
 Let's assume that categories with following ids: 1,2,3 are in the database.  
 **Request**  
@@ -117,7 +78,7 @@ Status: 201 CREATED
     }
 }
 ```
-##### 5. Listing all products.
+#### 3. Listing all products.
 
 **Request**  
 Endpoint: `/items`. Method: `GET`. Body: _empty_  
@@ -156,7 +117,7 @@ Status: 200 OK
     }
 ]
 ```
-##### 6. Creating an order (ok).
+#### 4. Creating an order (ok).
 
 Let's assume that items with following ids: 1,2,3 are in the database.  
 **Request**  
@@ -234,7 +195,7 @@ Status: 201 CREATED
     }
 }
 ```
-##### 6. Creating an order (fail).
+#### 5. Creating an order (fail).
 
 Let's assume that items with following ids: 1,2,3 are in the database.  
 **Request**  
@@ -259,7 +220,7 @@ Status: 400 BAD REQUEST
     "message": "Some of order elements refer to nonexistent items. Item ids which does not exist: 30"
 }
 ```
-##### 7. Updating an order - basic update.
+#### 6. Updating an order - basic update.
 
 **Request**  
 Endpoint: `/order`. Method: `PUT`. Body:  
@@ -272,11 +233,50 @@ Endpoint: `/order`. Method: `PUT`. Body:
 **Response**  
 Status: 200 OK  
 The same object in the body with `user_id` and `status` changed.  
-##### 8. Updating an order - advanced update.
+#### 7. Updating an order - advanced update.
 
 **Request**  
 Endpoint: `/order`. Method: `PUT`. Body:  
 The same as the request body when creation. Advanced update allows to define new order elements.  
 **Response**  
 Status: 200 OK  
-The updated order object in the same format as in _order creation_ response. 
+The updated order object in the same format as in _order creation_ response.  
+#### 8. Adding new item (fail).
+
+Let's assume that categories with following ids: 1,2,3 are in the database.  
+**Request**  
+Endpoint: `/item`. Method: `POST`. Body: 
+```json
+{
+    "name": "Komputer 100 Giga",
+    "categories": [1, 10], 
+    "description": "Cool computer",
+    "price": 2499.99
+}
+```
+**Response**  
+Status: 404 NOT FOUND  
+```json
+{
+    "message": "Category with id: 10 does not exists. Item's category id's must exist before the item can be created. Create this category and try again."
+}
+```
+#### 9. Adding new item (fail).
+
+**Request**  
+Endpoint: `/item`. Method: `POST`. Body: 
+```json
+{
+    "name": "Komputer 100 Giga",
+    "categories": [], 
+    "description": "Cool computer",
+    "price": 2499.99
+}
+```
+**Response**  
+Status: 400 BAD REQUEST  
+```json
+{
+    "message": "Item must have at lest one category."
+}
+```

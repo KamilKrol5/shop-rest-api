@@ -40,6 +40,7 @@ db.init_app(app)
 
 API_DOCS_URL = '/api/docs/ui'
 
+# in real-life provide this url as env variable or sth else
 docs_ui_blueprint = get_swaggerui_blueprint(API_DOCS_URL, "http://localhost:5000/api/swagger.json")
 
 app.cli.add_command(db_cli)

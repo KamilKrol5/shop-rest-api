@@ -19,11 +19,11 @@ def db_create():
 @db_cli.command('db_populate')
 def db_populate():
     users = [
-        UserModel(id=1, name='Marian Podagrycznik', email='pogagrycznik_m@gmail.com'),
-        UserModel(id=2, name='Adolf Hortler', email='adi6000000@reich.com'),
-        UserModel(id=3, name='Jarosław Kwaczyński', email='socjalista@peace.com'),
-        UserModel(id=4, name='Zbigniew Przesladowca', email='ziobro@gmail.com'),
-        UserModel(id=5, name='Zbigniew Stonoga', email='ziobroprzestanmirodzine@przesladowac.com'),
+        UserModel(id=1, name='Karol Krawczyk', email='karol_krawczyk@gmail.com'),
+        UserModel(id=2, name='Monica Geller', email='geller_mon@gmail.com'),
+        UserModel(id=3, name='Rachel Green', email='rachel_g@gmail.com'),
+        UserModel(id=4, name='Paweł Okrutnik', email='pawel7312@gmail.com'),
+        UserModel(id=5, name='Danuta Norek', email='tadziknagore@gmail.com'),
     ]
     categories = [
         ItemCategoryModel(name='fun'),
@@ -32,20 +32,20 @@ def db_populate():
         ItemCategoryModel(name='computer'),
     ]
     items = [
-        ItemModel(id=1, name='Procesor intel', price=199.9, categories=[
+        ItemModel(id=1, name='Good Processor', price=199.9, categories=[
             categories[0], categories[3]
         ]),
         ItemModel(id=2, name='Komputer 100 Giga', price=2499.99, categories=[
             categories[0], categories[3]
         ]),
-        ItemModel(id=3, name='Miska z kolekcji "Miski Magdaleny Wiaderskiej"', price=120, categories=[
+        ItemModel(id=3, name='Wiadro firmy WiadroPOL', price=120, categories=[
             categories[1]
         ]),
-        ItemModel(id=4, name='Fleetwood Mac - Tango In The Night, winyl', price=26.99, categories=[
+        ItemModel(id=4, name='Fleetwood Mac - Tango In The Night, vinyl', price=26.99, categories=[
             categories[2]
         ]),
-        ItemModel(id=5, name='Pizdogrzmot 3000 PLUS', price=549.99, categories=[
-            categories[0]
+        ItemModel(id=5, name='Keyboard 3000', price=549.99, categories=[
+            categories[0], categories[2]
         ]),
     ]
     orders = [

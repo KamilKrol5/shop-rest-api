@@ -24,7 +24,6 @@ def handle_no_json_body():
 
 def _retrieve_kwarg_by_regex(regex, kwargs):
     for kwarg in kwargs:
-        print(kwarg)
         if re.match(regex, kwarg):
             return kwarg, kwargs[kwarg]
     return None

@@ -96,10 +96,11 @@ class UpdateOrderAdvanced(Resource):
 
         old_to_delete = [e['item_id'] for e in old_elements if e not in new_elements]
         new_to_add = [e for e in new_elements if e not in old_elements]
-        print('O', old_elements)
-        print('N', new_elements)
-        print(old_to_delete)
-        print(new_to_add)
+        # useful for debugging purposes
+        # print('O', old_elements)
+        # print('N', new_elements)
+        # print(old_to_delete)
+        # print(new_to_add)
 
         # for x in order.elements:
         #     print(x.item_id in old_to_delete)

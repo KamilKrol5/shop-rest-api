@@ -37,12 +37,3 @@ def _validate_items_existence(elements: List[OrderElementModel]) -> List[int]:
             if not ItemModel.find_by_id(elem.item_id):
                 invalid_elements.append(elem.item_id)
     return invalid_elements
-
-
-def as_method(function):
-    """Adds self argument to the function."""
-
-    def new_func(self, *args, **kwargs):
-        return function(*args, **kwargs)
-
-    return new_func

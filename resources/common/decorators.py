@@ -5,8 +5,7 @@ from flask_restful_swagger_2 import swagger
 
 from db import ma, db
 from resources.common.endpoints import _get_by_id, _get_all, _post, _delete
-from resources.common.utils import add_to_allowed_methods
-from resources.orders.utils import as_method
+from resources.common.utils import add_to_allowed_methods, as_method
 
 
 def add_get_by_id_endpoint(

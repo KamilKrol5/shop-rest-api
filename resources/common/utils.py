@@ -45,3 +45,12 @@ def handle_request_validation_and_serialisation(
 
 def items_unique(elements: List[int]) -> bool:
     return len(elements) == len(set(elements))
+
+
+def as_method(function):
+    """Adds self argument to the function."""
+
+    def new_func(self, *args, **kwargs):
+        return function(*args, **kwargs)
+
+    return new_func
